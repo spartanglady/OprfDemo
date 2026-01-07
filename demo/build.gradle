@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+dependencies {
+    implementation project(':core')
+
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // JSON
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+springBoot {
+    mainClass = 'com.oprf.demo.IdentityHubApplication'
+}
+
+// Task to run client simulation
+tasks.register('simulateClients', JavaExec) {
+    group = 'application'
+    description = 'Simulate multiple clients submitting events'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.oprf.demo.client.ClientSimulator'
+}
+
+// Task to run key rotation demo
+tasks.register('rotationDemo', JavaExec) {
+    group = 'application'
+    description = 'Demonstrate key rotation workflow'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.oprf.demo.client.KeyRotationDemo'
+}

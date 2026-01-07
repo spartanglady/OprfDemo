@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+**/build/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# IDEs
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+
+# OS
+.DS_Store
