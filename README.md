@@ -1,5 +1,13 @@
 # OPRF Server Library
 
+![RFC 9497](https://img.shields.io/badge/RFC-9497-2b6cb0)
+![Java 21+](https://img.shields.io/badge/Java-21%2B-f89820)
+![CipherSuite](https://img.shields.io/badge/CipherSuite-P256--SHA256-0ea5e9)
+![Modes](https://img.shields.io/badge/Modes-OPRF%20%7C%20VOPRF%20%7C%20POPRF-10b981)
+![Demo](https://img.shields.io/badge/Demo-Identity%20Hub-f97316)
+
+> 🔐 Privacy-preserving identity correlation with strict RFC 9497 conformance and a practical Spring Boot demo.
+
 A Java implementation of Oblivious Pseudorandom Functions (OPRF) per [RFC 9497](https://datatracker.ietf.org/doc/rfc9497/), with a practical demo for privacy-preserving cross-client identity correlation.
 
 ## Table of Contents
