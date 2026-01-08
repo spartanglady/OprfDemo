@@ -19,6 +19,7 @@ A Java implementation of Oblivious Pseudorandom Functions (OPRF) per [RFC 9497](
 - [Key Rotation Demo](#key-rotation-demo)
 - [API Reference](#api-reference)
 - [Library Usage](#library-usage)
+- [Publishing](#publishing)
 - [Technical Details](#technical-details)
 - [Deep Dive: Protocol Security](#deep-dive-protocol-security)
 - [Server Data Model](#server-data-model)
@@ -559,6 +560,87 @@ byte[] publicKey = server.getPublicKey();       // 33 bytes - share with clients
 
 // Restore later
 OprfServer restored = OprfServer.create(OprfMode.VERIFIABLE, privateKey);
+```
+
+---
+
+## Publishing
+
+### Publish to GitHub Packages (Maven)
+
+Set your GitHub username/token (token needs `write:packages`):
+
+```bash
+export GITHUB_ACTOR="your-github-username"
+export GITHUB_TOKEN="your-github-token"
+```
+
+Publish the core library:
+
+```bash
+./gradlew :core:publish -PreleaseVersion=1.0.0
+```
+
+### Publish via GitHub Actions
+
+**Tag-based release**
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The workflow will publish `com.oprf:oprf-core:1.0.0` to GitHub Packages.
+
+**Manual release**
+
+Run the “Publish to GitHub Packages” workflow and supply a version like `1.2.3`.
+
+### Versioning Strategy
+
+- **SemVer**: `MAJOR.MINOR.PATCH` (breaking/feature/fix).
+- **Snapshots on main**: `version` in `gradle.properties` stays at the next `-SNAPSHOT`.
+- **Releases from tags**: tag `vX.Y.Z` and the workflow publishes with that exact version.
+- **Post-release**: bump `gradle.properties` to the next snapshot (e.g., `1.1.0-SNAPSHOT`).
+
+### Consume from GitHub Packages
+
+**Gradle**
+
+```gradle
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/spartanglady/OprfDemo")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation "com.oprf:oprf-core:1.0.0"
+}
+```
+
+**Maven**
+
+```xml
+<repositories>
+  <repository>
+    <id>github</id>
+    <url>https://maven.pkg.github.com/spartanglady/OprfDemo</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>com.oprf</groupId>
+    <artifactId>oprf-core</artifactId>
+    <version>1.0.0</version>
+  </dependency>
+</dependencies>
 ```
 
 ---

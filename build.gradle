@@ -3,9 +3,11 @@ plugins {
     id 'idea'
 }
 
+def releaseVersion = findProperty('releaseVersion') ?: System.getenv('RELEASE_VERSION')
+
 allprojects {
     group = 'com.oprf'
-    version = '1.0.0'
+    version = releaseVersion ?: project.version
 
     repositories {
         mavenCentral()
