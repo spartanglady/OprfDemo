@@ -590,7 +590,10 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-The workflow will publish `com.oprf:oprf-core:1.0.0` to GitHub Packages.
+This will:
+- publish `com.oprf:oprf-core:1.0.0` to GitHub Packages
+- create a GitHub Release
+- bump `gradle.properties` to `1.0.1-SNAPSHOT` on `main`
 
 **Manual release**
 
@@ -601,7 +604,7 @@ Run the “Publish to GitHub Packages” workflow and supply a version like `1.2
 - **SemVer**: `MAJOR.MINOR.PATCH` (breaking/feature/fix).
 - **Snapshots on main**: `version` in `gradle.properties` stays at the next `-SNAPSHOT`.
 - **Releases from tags**: tag `vX.Y.Z` and the workflow publishes with that exact version.
-- **Post-release**: bump `gradle.properties` to the next snapshot (e.g., `1.1.0-SNAPSHOT`).
+- **Post-release**: automatically bump to the next patch snapshot (e.g., `1.0.1-SNAPSHOT`).
 
 ### Consume from GitHub Packages
 

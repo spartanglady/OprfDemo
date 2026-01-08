@@ -26,12 +26,28 @@ publishing {
             pom {
                 name = 'OPRF Core Library'
                 description = 'Java implementation of OPRF (Oblivious Pseudorandom Function) per RFC 9497'
+                url = 'https://github.com/spartanglady/OprfDemo'
                 licenses {
                     license {
                         name = 'MIT License'
                         url = 'https://opensource.org/licenses/MIT'
                     }
                 }
+                scm {
+                    url = 'https://github.com/spartanglady/OprfDemo'
+                    connection = 'scm:git:git://github.com/spartanglady/OprfDemo.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/spartanglady/OprfDemo.git'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = uri('https://maven.pkg.github.com/spartanglady/OprfDemo')
+            credentials {
+                username = project.findProperty('gpr.user') ?: System.getenv('GITHUB_ACTOR')
+                password = project.findProperty('gpr.key') ?: System.getenv('GITHUB_TOKEN')
             }
         }
     }
